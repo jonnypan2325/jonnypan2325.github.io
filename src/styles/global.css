@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------
+   Compact token system. Change these and the whole site follows.
+   --------------------------------------------------------------- */
+@theme {
+  --color-bg: #ffffff;
+  --color-ink: #18191d; /* near-black text */
+  --color-muted: #6b7280; /* secondary text */
+  --color-faint: #a3a3a3; /* years, labels, tertiary */
+  --color-rule: #ececec; /* hairline dividers */
+  --color-accent: #0e6ba8; /* ocean blue */
+  --color-accent-dark: #0a527f;
+
+  --font-sans: 'Inter Variable', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Metric-matched fallback so text does not reflow when Inter finishes loading. */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+  size-adjust: 107.12%;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
