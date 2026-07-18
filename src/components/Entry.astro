@@ -1,0 +1,78 @@
+---
+interface Props {
+  title: string;
+  href?: string;
+  meta?: string;
+  dates?: string;
+  tags?: string[];
+  /** An underlined link rendered inside the heading (for example the company or org). */
+  link?: { text: string; href?: string };
+  /** Small labelled links shown under the entry (Devpost, GitHub, Slides, ...). */
+  links?: { label: string; href: string }[];
+  /** Heading level so each page keeps a correct outline. */
+  headingLevel?: 2 | 3;
+}
+const { title, href, meta, dates, tags, link, links, headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+// Open links to other sites in a new tab.
+const external = href ? href.startsWith('http') : false;
+---
+
+<div class="py-4">
+  <div class="flex items-baseline justify-between gap-4">
+    <Heading class="text-[15px] font-medium text-ink">
+      {
+        href ? (
+          <a
+            href={href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+            class="transition-colors hover:text-accent"
+          >
+            {title}
+          </a>
+        ) : (
+          <Fragment>
+            {title}
+            {link && (
+              <Fragment>
+                {' '}
+                {link.href ? (
+                  <a
+                    href={link.href}
+                    target={link.href.startsWith('http') ? '_blank' : undefined}
+                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    class="underline decoration-1 underline-offset-2 transition-colors hover:text-accent"
+                  >
+                    {link.text}
+                  </a>
+                ) : (
+                  link.text
+                )}
+              </Fragment>
+            )}
+          </Fragment>
+        )
+      }
+    </Heading>
+    {dates && <span class="shrink-0 text-xs tabular-nums text-faint">{dates}</span>}
+  </div>
+  {meta && <p class="mt-1 whitespace-pre-line text-sm leading-relaxed text-muted">{meta}</p>}
+  {tags && tags.length > 0 && <p class="mt-1.5 text-xs text-muted">{tags.join('  ·  ')}</p>}
+  {
+    links && links.length > 0 && (
+      <div class="mt-2 flex flex-wrap gap-4 text-sm">
+        {links.map((l) => (
+          <a
+            href={l.href}
+            target={l.href.startsWith('http') ? '_blank' : undefined}
+            rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="font-medium text-accent transition-colors hover:text-accent-dark"
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</div>

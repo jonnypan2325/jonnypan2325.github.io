@@ -1,0 +1,52 @@
+/**
+ * Single source of truth for identity and links.
+ * Every page updates and imports from this file.
+ */
+export const site = {
+  name: 'Jonathan Pan',
+  role: 'CS student at UC Irvine',
+  url: 'https://jonathanpan.me',
+
+  tagline:
+    'CS student at UC Irvine. I build software and AI systems, and I surf when I can.',
+
+  /** Default meta description, used when a page does not set its own. */
+  description: 'Personal website of Jonathan Pan, a CS student at UC Irvine.',
+
+  email: 'jpan13@uci.edu',
+
+  resume: '/Jonathan_Pan_resume.pdf',
+
+  /** Social preview image (1200x630), used for Open Graph. */
+  ogImage: '/og.png',
+
+  /** Paste the token from Google Search Console to verify the site. */
+  googleSiteVerification: '',
+
+  /**
+   * Surfboard counter (optional). Both values are public and safe to commit.
+   * Leave counterApiUrl empty to keep the counter inactive.
+   */
+  counterApiUrl: '',
+  turnstileSiteKey: '',
+
+  links: [
+    { label: 'GitHub', href: 'https://github.com/jonnypan2325' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/jonathanypan' },
+    { label: 'Email', href: 'mailto:jpan13@uci.edu' },
+  ],
+};
+
+export const education = {
+  school: 'University of California, Irvine',
+  degree: 'B.S. Computer Science, expected 2027',
+  dates: '2023 - 2027',
+};
+
+/** Navigation shown in the header. */
+export const nav = [
+  { label: 'Experience', href: '/experience' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'About', href: '/about' },
+  { label: 'Resume', href: site.resume },
+];
