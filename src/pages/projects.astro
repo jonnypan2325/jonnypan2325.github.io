@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+---
+
+<Base title="Projects">
+  <div class="mx-auto w-full max-w-[38rem] px-6 pb-24">
+    <h1 class="mt-8 text-lg font-semibold tracking-tight text-ink">Projects</h1>
+    <p class="mt-2 text-sm leading-relaxed text-muted">Things I have built.</p>
+    <div class="mt-10">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </div>
+</Base>

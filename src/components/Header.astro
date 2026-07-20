@@ -1,0 +1,53 @@
+---
+import { site, nav } from '../data/site';
+
+const path = Astro.url.pathname;
+const isHome = path === '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header
+  class="mx-auto flex w-full max-w-[38rem] flex-wrap items-baseline justify-between gap-x-6 gap-y-2 px-6 pt-14"
+>
+  {
+    isHome ? (
+      <h1 class="text-lg font-semibold tracking-tight text-ink">
+        <a href="/" class="transition-colors hover:text-accent">
+          {site.name}
+        </a>
+      </h1>
+    ) : (
+      <a
+        href="/"
+        class="text-lg font-semibold tracking-tight text-ink transition-colors hover:text-accent"
+      >
+        {site.name}
+      </a>
+    )
+  }
+  <nav aria-label="Primary" class="flex gap-4 text-sm">
+    {
+      nav.map((item) => {
+        // PDF and external links must bypass the client router so the browser
+        // opens them directly instead of trying to swap them in as a page.
+        const bypass = item.href.endsWith('.pdf') || item.href.startsWith('http');
+        return (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            data-astro-reload={bypass || undefined}
+            target={bypass ? '_blank' : undefined}
+            rel={bypass ? 'noopener noreferrer' : undefined}
+            class:list={[
+              'transition-colors hover:text-accent',
+              isActive(item.href) ? 'text-accent' : 'text-muted',
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })
+    }
+  </nav>
+</header>

@@ -1,0 +1,29 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+---
+
+<div class="border-b border-rule py-4">
+  <div class="flex items-baseline justify-between gap-4">
+    <h3 class="text-[15px] font-medium text-ink">{project.title}</h3>
+    {project.year && <span class="shrink-0 text-xs tabular-nums text-faint">{project.year}</span>}
+  </div>
+  <p class="mt-1 text-sm leading-relaxed text-muted">{project.description}</p>
+  {project.tags.length > 0 && <p class="mt-1.5 text-xs text-muted">{project.tags.join('  ·  ')}</p>}
+  {
+    project.repo && (
+      <a
+        href={project.repo}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-2 inline-block text-sm font-medium text-accent transition-colors hover:text-accent"
+      >
+        Source
+      </a>
+    )
+  }
+</div>
