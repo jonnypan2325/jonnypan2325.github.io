@@ -4,6 +4,8 @@ import Section from '../components/Section.astro';
 import Entry from '../components/Entry.astro';
 import { site } from '../data/site';
 import { experience } from '../data/experience';
+import { leadership } from '../data/leadership';
+import { hackathons } from '../data/hackathons';
 ---
 
 <Base>
@@ -20,6 +22,34 @@ import { experience } from '../data/experience';
             meta={e.summary}
             dates={e.dates}
             tags={e.tags}
+          />
+        ))
+      }
+    </Section>
+
+    <Section label="leadership">
+      {
+        leadership.map((l) => (
+          <Entry
+            title={`${l.role},`}
+            link={{ text: l.org, href: l.href }}
+            meta={l.summary}
+            dates={l.dates}
+            tags={l.tags}
+          />
+        ))
+      }
+    </Section>
+
+    <Section label="hackathons">
+      {
+        hackathons.map((h) => (
+          <Entry
+            title={h.project}
+            meta={`${h.event}. ${h.summary}`}
+            dates={h.placement ?? h.dates}
+            tags={h.tags}
+            links={h.links}
           />
         ))
       }
