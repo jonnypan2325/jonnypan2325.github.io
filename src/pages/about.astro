@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Entry from '../components/Entry.astro';
+import { site, education } from '../data/site';
+---
+
+<Base title="About" description="About Jonathan Pan, a CS student at UC Irvine.">
+  <div class="mx-auto w-full max-w-[38rem] px-6 pb-24">
+    <h1 class="mt-8 text-lg font-semibold tracking-tight text-ink">About</h1>
+    <div class="mt-4 space-y-4 text-[15px] leading-relaxed text-muted">
+      <p>Having spent parts of my childhood in Texas as well as Taiwan, I am now in sunny SoCal to ⛳ and 🏄 [and for college :p].</p>
+      <p>I'm passionate about the science of computing, machine learning, and making cool stuff.</p>
+    </div>
+
+    <Section label="education">
+      <Entry title={education.school} meta={education.degree} dates={education.dates} />
+    </Section>
+
+    <Section label="contact">
+      <p class="py-4 text-sm text-muted">
+        Reach me on
+        <a
+          href="https://linkedin.com/in/jonathanypan"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-ink transition-colors hover:text-accent"
+          >LinkedIn</a
+        >.
+      </p>
+    </Section>
+
+    <a
+      href={site.resume}
+      data-astro-reload
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-8 inline-block text-sm text-accent transition-colors hover:text-accent-dark"
+      >Download resume (PDF)</a
+    >
+  </div>
+</Base>
