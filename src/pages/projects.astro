@@ -1,15 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import Entry from '../components/Entry.astro';
 import { projects } from '../data/projects';
 ---
 
-<Base title="Projects">
+<Base title="Projects" description="Projects built by Jonathan Pan.">
   <div class="mx-auto w-full max-w-[38rem] px-6 pb-24">
     <h1 class="mt-8 text-lg font-semibold tracking-tight text-ink">Projects</h1>
-    <p class="mt-2 text-sm leading-relaxed text-muted">Things I have built.</p>
-    <div class="mt-10">
-      {projects.map((p) => <ProjectCard project={p} />)}
+    <p class="mt-2 text-sm leading-relaxed text-muted">Things I have built. (edit me)</p>
+    <div class="mt-10 divide-y divide-rule">
+      {
+        projects.map((p) => (
+          <Entry
+            title={p.title}
+            href={p.repo ?? p.href}
+            meta={p.description}
+            dates={p.year}
+            tags={p.tags}
+            headingLevel={2}
+          />
+        ))
+      }
     </div>
   </div>
 </Base>
