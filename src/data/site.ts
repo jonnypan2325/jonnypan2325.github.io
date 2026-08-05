@@ -45,7 +45,7 @@ export const education = {
 
 /** Navigation shown in the header. */
 export const nav = [
-  { label: 'Experience', href: '/experience' },
+  { label: 'Experience', href: '/' },
   { label: 'Projects', href: '/projects' },
   { label: 'About', href: '/about' },
   { label: 'Resume', href: site.resume },
