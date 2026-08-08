@@ -1,0 +1,19 @@
+# Jonathan Pan
+
+> Computer science student at UC Irvine. This site is a portfolio of projects and background. (edit me)
+
+## Pages
+
+- [Home](https://jonathanpan.me/): overview, links, and featured projects
+- [Projects](https://jonathanpan.me/projects): the full project list
+- [About](https://jonathanpan.me/about): background, experience, and resume
+
+## Projects
+
+- Personal website : this one
+- Strava art : runnable doodles
+
+## Contact
+
+- GitHub: https://github.com/jonnypan2325
+- LinkedIn: https://linkedin.com/in/jonathanypan
