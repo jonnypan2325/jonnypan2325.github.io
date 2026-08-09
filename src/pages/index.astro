@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import Entry from '../components/Entry.astro';
+import SurfboardCounter from '../components/SurfboardCounter.astro';
 import { site } from '../data/site';
 import { experience } from '../data/experience';
 import { leadership } from '../data/leadership';
@@ -54,5 +55,7 @@ import { hackathons } from '../data/hackathons';
         ))
       }
     </Section>
+
+    <SurfboardCounter />
   </div>
 </Base>
