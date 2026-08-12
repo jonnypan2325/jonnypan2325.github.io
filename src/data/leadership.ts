@@ -16,7 +16,7 @@ export const leadership: Leadership[] = [
     org: 'AI Club',
     href: 'https://aiclub.ics.uci.edu/',
     dates: '2025 - present',
-    summary: 'Led CloudHacks 2025, a 36 hour hackathon with 150+ participants, including planning, logistics, and workshops. Organized industry partnered projects.',
+    summary: 'Led CloudHacks 2025 + organized external tech industry partnered projects.',
   },
   /*
   {

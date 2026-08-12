@@ -46,7 +46,7 @@ import { hackathons } from '../data/hackathons';
         hackathons.map((h) => (
           <Entry
             title={h.project}
-            meta={`${h.event}. ${h.summary}`}
+            meta={h.summary}
             dates={h.placement ?? h.dates}
             tags={h.tags}
             links={h.links}

@@ -4,7 +4,6 @@
  */
 export interface Hackathon {
   project: string;
-  event: string;
   placement?: string;
   dates: string;
   summary: string;
@@ -15,8 +14,7 @@ export interface Hackathon {
 export const hackathons: Hackathon[] = [
   {
     project: 'LeShrine',
-    event: 'IrvineHacks',
-    placement: 'Meme Hack 2nd place',
+    placement: 'Meme Hack 2nd place @ IrvineHacks 2025',
     dates: '2025',
     summary: 'LeBron themed ad-blocker that blocks ads and replaces them with LeBron memes',
     tags: ['HTML', 'JavaScript'],
@@ -29,7 +27,6 @@ export const hackathons: Hackathon[] = [
   /*
   {
     project: 'name',
-    event: 'hackathon',
     placement: 'first place',
     dates: '2026',
     summary: 'desc',
