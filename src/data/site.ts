@@ -4,7 +4,7 @@
  */
 export const site = {
   name: 'Jonathan Pan',
-  role: 'CS student at UC Irvine',
+  role: '',
   url: 'https://jonathanpan.me',
 
   tagline:
@@ -12,8 +12,6 @@ export const site = {
 
   /** Default meta description, used when a page does not set its own. */
   description: 'Personal website of Jonathan Pan, a CS student at UC Irvine.',
-
-  email: 'jpan13@uci.edu',
 
   resume: '/Jonathan_Pan_resume.pdf',
 
@@ -27,13 +25,12 @@ export const site = {
    * Surfboard counter (optional). Both values are public and safe to commit.
    * Leave counterApiUrl empty to keep the counter inactive.
    */
-  counterApiUrl: '',
-  turnstileSiteKey: '',
+  counterApiUrl: 'https://surf-counter.jonathanp2325.workers.dev',
+  turnstileSiteKey: '0x4AAAAAAENytQ1ynC_6vzIY',
 
   links: [
     { label: 'GitHub', href: 'https://github.com/jonnypan2325' },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/jonathanypan' },
-    { label: 'Email', href: 'mailto:jpan13@uci.edu' },
   ],
 };
 

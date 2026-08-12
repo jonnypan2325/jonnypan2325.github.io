@@ -1,0 +1,12 @@
+# Copy this file to `.dev.vars` for local `wrangler dev`. Never commit real secrets.
+
+# For local dev, allow the Astro dev server origin (default port 4321).
+ALLOWED_ORIGIN=http://localhost:4321
+
+# Cloudflare Turnstile secret. The value below is Cloudflare's "always passes"
+# test secret, useful for local development.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+
+# Pushover push notifications:
+PUSHOVER_TOKEN=your_pushover_app_token
+PUSHOVER_USER=your_pushover_user_key

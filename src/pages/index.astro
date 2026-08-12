@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import Entry from '../components/Entry.astro';
-import SurfboardCounter from '../components/SurfboardCounter.astro';
+import WaveCounter from '../components/WaveCounter.astro';
 import { site } from '../data/site';
 import { experience } from '../data/experience';
 import { leadership } from '../data/leadership';
@@ -11,8 +11,7 @@ import { hackathons } from '../data/hackathons';
 
 <Base>
   <div class="mx-auto w-full max-w-[38rem] px-6 pb-24">
-    <h1 class="mt-8 text-lg font-semibold tracking-tight">{site.name}</h1>
-    <p class="mt-2 text-[15px] leading-relaxed text-slate-500">{site.tagline}</p>
+    <p class="mt-8 text-[15px] leading-relaxed text-muted">{site.tagline}</p>
 
     <Section label="work">
       {
@@ -56,6 +55,6 @@ import { hackathons } from '../data/hackathons';
       }
     </Section>
 
-    <SurfboardCounter />
+    <WaveCounter />
   </div>
 </Base>
