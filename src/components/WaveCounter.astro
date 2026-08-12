@@ -151,6 +151,8 @@ const active = Boolean(api && siteKey);
     let sending = false;
     let popupTimer = 0;
     let widgetId: string | null = null;
+    let currentToken = '';
+    let pendingSend = false;
 
     const setCount = (n: number) => {
       const s = String(n);
@@ -237,6 +239,9 @@ const active = Boolean(api && siteKey);
         status.textContent = 'Network error. Please try again.';
       } finally {
         sending = false;
+        currentToken = '';
+        // Prime a fresh token for next time (single-use tokens).
+        if (w.turnstile && widgetId !== null) w.turnstile.reset(widgetId);
       }
     };
 
@@ -245,16 +250,28 @@ const active = Boolean(api && siteKey);
       if (!w.turnstile || !(tsContainer instanceof HTMLElement) || widgetId !== null) return;
       widgetId = w.turnstile.render(tsContainer, {
         sitekey: siteKey,
-        execution: 'execute',
         appearance: 'interaction-only',
-        callback: (token: string) => send(token),
-        'error-callback': () => {
-          btn.textContent = idleLabel;
-          btn.removeAttribute('disabled');
-          status.textContent = 'Could not verify. Please try again.';
-          sending = false;
+        callback: (token: string) => {
+          currentToken = token;
+          // If the user already clicked and was waiting, send now.
+          if (pendingSend) {
+            pendingSend = false;
+            send(currentToken);
+          }
         },
-        'expired-callback': () => {},
+        'error-callback': () => {
+          currentToken = '';
+          if (pendingSend) {
+            pendingSend = false;
+            btn.textContent = idleLabel;
+            btn.removeAttribute('disabled');
+            status.textContent = 'Could not verify. Please try again.';
+            sending = false;
+          }
+        },
+        'expired-callback': () => {
+          currentToken = '';
+        },
       });
     };
 
@@ -275,7 +292,7 @@ const active = Boolean(api && siteKey);
         showPopup();
         return;
       }
-      if (!w.turnstile || widgetId === null) {
+      if (!currentToken && (!w.turnstile || widgetId === null)) {
         status.textContent = 'Still loading, give it a second and try again.';
         return;
       }
@@ -283,8 +300,12 @@ const active = Boolean(api && siteKey);
       btn.setAttribute('disabled', 'true');
       btn.textContent = 'Sending your wave...';
       status.textContent = '';
-      w.turnstile.reset(widgetId);
-      w.turnstile.execute(widgetId);
+      if (currentToken) {
+        send(currentToken);
+      } else {
+        // Token is not ready yet; send as soon as Turnstile produces it.
+        pendingSend = true;
+      }
     });
   }
 

@@ -112,7 +112,7 @@ async function notify(count: number, env: Env): Promise<string> {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
@@ -163,8 +163,9 @@ export default {
       await env.COUNTER.put(COUNT_KEY, String(count));
       await env.COUNTER.put(ipcKey, String(used + 1), { expirationTtl: 3600 });
 
-      const notified = await notify(count, env);
-      return json({ count, notify: notified }, request, env);
+      // Notify in the background so the response returns without waiting on it.
+      ctx.waitUntil(notify(count, env));
+      return json({ count }, request, env);
     }
 
     return json({ error: 'not_found' }, request, env, 404);
