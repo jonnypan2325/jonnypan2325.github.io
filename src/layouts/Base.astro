@@ -3,7 +3,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { site, education } from '../data/site';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -24,6 +24,39 @@ const fullTitle = title
 const base = Astro.site ?? new URL(site.url);
 const canonical = new URL(Astro.url.pathname, base).href;
 const ogImageUrl = new URL(site.ogImage, base).href;
+
+const personId = `${base.origin}/#person`;
+const person = {
+  '@type': 'Person',
+  '@id': personId,
+  name: site.name,
+  url: base.origin + '/',
+  image: ogImageUrl,
+  description: site.tagline,
+  // Identity claims. Mirrored by rel="me" on the same links in the footer.
+  sameAs: site.links.map((l) => l.href),
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: education.school,
+    sameAs: 'https://uci.edu/',
+  },
+  ...(site.role ? { jobTitle: site.role } : {}),
+};
+const website = {
+  '@type': 'WebSite',
+  '@id': `${base.origin}/#website`,
+  url: base.origin + '/',
+  name: site.name,
+  description: site.description,
+  inLanguage: 'en-US',
+  author: { '@id': personId },
+  publisher: { '@id': personId },
+};
+const isHome = Astro.url.pathname === '/';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': isHome ? [person, website] : [website],
+};
 ---
 
 <!doctype html>
@@ -64,6 +97,13 @@ const ogImageUrl = new URL(site.ogImage, base).href;
     }
 
     <meta name="generator" content={Astro.generator} />
+
+    {
+      /* Skipped on noindex pages (404), which should make no entity claims. */
+      !noindex && (
+        <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+      )
+    }
 
     <ClientRouter />
   </head>

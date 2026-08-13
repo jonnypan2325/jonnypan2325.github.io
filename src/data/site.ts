@@ -19,7 +19,7 @@ export const site = {
   ogImage: '/og.png',
 
   /** Paste the token from Google Search Console to verify the site. */
-  googleSiteVerification: '',
+  googleSiteVerification: 'Q0XTEQOa1tHg99p4bgvNcMMrSPzOWzcUNcLNOLECsY0',
 
   /**
    * Surfboard counter (optional). Both values are public and safe to commit.
@@ -28,9 +28,12 @@ export const site = {
   counterApiUrl: 'https://surf-counter.jonathanp2325.workers.dev',
   turnstileSiteKey: '0x4AAAAAAENytQ1ynC_6vzIY',
 
+  /**
+   * `sameAs` identity claims must be each profile's canonical URL (ex. LinkedIn's includes `www.`).
+   */
   links: [
     { label: 'GitHub', href: 'https://github.com/jonnypan2325' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/jonathanypan' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jonathanypan' },
   ],
 };
 

@@ -13,7 +13,14 @@ const year = new Date().getFullYear();
       {
         site.links.map((l) => (
           <li>
-            <a href={l.href} class="transition-colors hover:text-accent">
+            {/* rel="me" claims these profiles as the same person, mirroring the
+                `sameAs` array in the JSON-LD Person node in Base.astro. */}
+            <a
+              href={l.href}
+              rel="me noopener noreferrer"
+              target="_blank"
+              class="transition-colors hover:text-accent"
+            >
               {l.label}
             </a>
           </li>
